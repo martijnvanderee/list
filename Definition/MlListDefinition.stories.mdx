@@ -1,0 +1,71 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import MlListDefinition from './MlListDefinition.vue';
+import MlDt from './MlDt/MlDt.vue';
+import MlDd from './MlDd/MlDd.vue';
+import { MlCallout } from '@Components';
+
+<Meta title="Components/List/Definition" component={MlListDefinition} />
+
+# List Definition
+
+List Definition is a component for showing definitions and their meaning
+
+export const Template = args => ({
+    components: { MlListDefinition, MlCallout, MlDt, MlDd },
+    setup() {
+        return { args };
+    },
+    template: `
+                <MlListDefinition
+                    v-bind="args"
+                >
+                ${args.template}
+                </MlListDefinition>
+            `
+});
+
+<Canvas>
+    <Story
+        name="Default"
+        args={{
+            id: 'test',
+            template: `
+               <MlDt id="naam">Naam</MlDt>
+                    <MlDd>Vera Zara Naomi Jansen</MlDd>
+                    <MlDd has-offset>
+                        <MlCallout
+                            heading="Kinderen tot 18 jaar zijn gratis meeverzekerd"
+                            text="Kinderen tot 18 jaar zijn gratis meeverzekerd met de hoogste aanvullende verzekering van hun ouders. Ook betalen zij geen eigen risico."
+                        />
+                    </MlDd>
+            `
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>
+
+### Split Equal
+
+You can also define a definition list to be split equally between dt and dd by adding "splitEqual" to the dt and dd element, which makes both of them 50% width (col-md-6)
+
+<Canvas>
+    <Story
+        name="Split Equal"
+        args={{
+            id: 'test',
+            template: `
+              <MlDt id="naam" splitEqual >Naam</MlDt>
+                    <MlDd splitEqual>Vera Zara Naomi Jansen</MlDd>
+                    <MlDd has-offset splitEqual>
+                        <MlCallout
+                            heading="Kinderen tot 18 jaar zijn gratis meeverzekerd"
+                            text="Kinderen tot 18 jaar zijn gratis meeverzekerd met de hoogste aanvullende verzekering van hun ouders. Ook betalen zij geen eigen risico."
+                        />
+                    </MlDd>
+            `
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>

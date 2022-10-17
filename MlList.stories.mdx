@@ -1,0 +1,139 @@
+import { Canvas, Meta, Story, ArgsTable } from '@storybook/addon-docs';
+import MlList from './MlList.vue';
+
+<Meta
+    title="Components/List"
+    component={MlList}
+    argTypes={{
+        variant: {
+            control: 'select',
+            options: ['default', 'no-style', 'icons']
+        },
+        icon: {
+            control: 'select',
+            options: ['checkbox', 'document']
+        }
+    }}
+/>
+
+# List
+
+`List.vue` is flexible component for rendering classic html lists (ul / li combo's). It supports optional links and icons as bullet-point replacements.
+By default (when only specifying `items`), it renders normal bullet points:
+
+export const Template = args => ({
+    components: { MlList },
+    setup() {
+        return { args };
+    },
+    template: '<MlList v-bind="args" />'
+});
+
+<Canvas>
+    <Story
+        name="Default"
+        args={{
+            items: ['optie 1', 'optie 2', 'optie 3', 'optie 4']
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>
+
+## Props
+
+<ArgsTable of={MlList}></ArgsTable>
+
+## No-Style
+
+Using the optional `variant="no-style"` prop renders the list without bullet points.
+
+<Canvas>
+    <Story
+        name="no-style"
+        args={{
+            items: ['optie 1', 'optie 2', 'optie 3', 'optie 4'],
+            variant: 'no-style'
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>
+
+## Links
+
+Using an Array of objects with `name` and `url` keys will turn a list option automatically into a link. No need to specify a prop for this. You can also mix and match objects and strings inside the array.
+In the example below, we use `variant="no-style"` in combination with an array of objects containing a name, url. But you can also render links with a bullet point or icon if necessary.
+
+<Canvas>
+    <Story
+        name="no-style (linked)"
+        args={{
+            items: [
+                { name: 'link 1', url: 'https://achmea.nl' },
+                { name: 'link 2', url: 'https://achmea.nl' }
+            ],
+            variant: 'no-style'
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>
+
+## Icons
+
+We currently support two types of icons: `document` and `checkbox`.
+Use the prop `icon="document"` for displaying.
+You can't mix and match icons for now.
+
+### Icon -- Document
+
+Plain text variant:
+
+<Canvas>
+    <Story
+        name="Icons -- Document"
+        args={{
+            items: ['optie 1', 'optie 2', 'optie 3', 'optie 4'],
+            variant: 'icons',
+            icon: 'document'
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>
+
+Link variant:
+
+<Canvas>
+    <Story
+        name="Icons -- Document (linked)"
+        args={{
+            items: [
+                { name: 'link 1', url: 'https://achmea.nl' },
+                { name: 'link 2', url: 'https://achmea.nl' }
+            ],
+            variant: 'icons',
+            icon: 'document'
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>
+
+### Icon -- Checkbox
+
+Plain text variant:
+
+<Canvas>
+    <Story
+        name="Icons -- Checkbox"
+        args={{
+            items: ['optie 1', 'optie 2', 'optie 3', 'optie 4'],
+            variant: 'icons',
+            icon: 'checkbox'
+        }}
+    >
+        {Template.bind({})}
+    </Story>
+</Canvas>
